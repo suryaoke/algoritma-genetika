@@ -11,6 +11,11 @@
 |
 */
 
+use App\Http\Controllers\Admin\CoursesController;
+use App\Http\Controllers\Admin\DayController;
+use App\Http\Controllers\Admin\LecturersController;
+use App\Http\Controllers\Admin\TimeController;
+use App\Http\Controllers\Admin\TimedayController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Admin'], function () {
@@ -45,7 +50,7 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::post('days/create', ['as' => 'admin.day.store', 'uses' => 'DayController@store']);
         Route::get('days/edit/{id}', ['as' => 'admin.day.edit', 'uses' => 'DayController@edit']);
         Route::post('days/update/{id?}', ['as' => 'admin.day.update', 'uses' => 'DayController@update']);
-        Route::delete('days/delete/{id}', ['as' => 'admin.day.delete', 'uses' => 'DayController@destroy']);
+      
 
         //Time
         Route::get('times', ['as' => 'admin.times', 'uses' => 'TimeController@index']);
@@ -53,7 +58,7 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::post('times/create', ['as' => 'admin.time.store', 'uses' => 'TimeController@store']);
         Route::get('times/edit/{id}', ['as' => 'admin.time.edit', 'uses' => 'TimeController@edit']);
         Route::post('times/update/{id?}', ['as' => 'admin.time.update', 'uses' => 'TimeController@update']);
-        Route::delete('times/delete/{id}', ['as' => 'admin.time.delete', 'uses' => 'TimeController@destroy']);
+
 
         //Lecturer
         Route::get('lecturers', ['as' => 'admin.lecturers', 'uses' => 'LecturersController@index']);
@@ -61,7 +66,7 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::post('lecturers/create', ['as' => 'admin.lecturer.store', 'uses' => 'LecturersController@store']);
         Route::get('lecturers/edit/{id}', ['as' => 'admin.lecturer.edit', 'uses' => 'LecturersController@edit']);
         Route::post('lecturers/update/{id?}', ['as' => 'admin.lecturer.update', 'uses' => 'LecturersController@update']);
-        Route::delete('lecturers/delete/{id}', ['as' => 'admin.lecturer.delete', 'uses' => 'LecturersController@destroy']);
+
 
         //Courses
         Route::get('courses', ['as' => 'admin.courses', 'uses' => 'CoursesController@index']);
@@ -69,7 +74,7 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::post('courses/create', ['as' => 'admin.courses.store', 'uses' => 'CoursesController@store']);
         Route::get('courses/edit/{id}', ['as' => 'admin.courses.edit', 'uses' => 'CoursesController@edit']);
         Route::post('courses/update/{id?}', ['as' => 'admin.courses.update', 'uses' => 'CoursesController@update']);
-        Route::delete('courses/delete/{id}', ['as' => 'admin.courses.delete', 'uses' => 'CoursesController@destroy']);
+
 
         //Room
         Route::get('rooms', ['as' => 'admin.rooms', 'uses' => 'RoomsController@index']);
@@ -111,4 +116,20 @@ Route::group(['namespace' => 'Admin'], function () {
     });
 });
 
+
+Route::controller(LecturersController::class)->group(function () {
+    Route::get('lecturers/delete/{id}', 'destroy')->name('admin.lecturer.delete');
+});
+
+Route::controller(CoursesController::class)->group(function () {
+    Route::get('courses/delete/{id}', 'destroy')->name('admin.courses.delete');
+});
+
+Route::controller(TimeController::class)->group(function () {
+    Route::get('times/delete/{id}', 'destroy')->name('admin.time.delete');
+});
+
+Route::controller(DayController::class)->group(function () {
+    Route::get('days/delete/{id}', 'destroy')->name('admin.day.delete');
+});
 

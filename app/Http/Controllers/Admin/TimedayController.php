@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
+
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Day;
@@ -51,8 +53,7 @@ class TimedayController extends Controller
         $days     = Day::orderBy('name_day', 'asc')->pluck('name_day', 'id');
         $times    = Time::orderBy('range', 'asc')->pluck('range', 'id');
 
-        if ($timedays == null)
-        {
+        if ($timedays == null) {
             return view('admin.layouts.404');
         }
 
@@ -80,7 +81,7 @@ class TimedayController extends Controller
     {
         Timeday::find($id)->delete();
 
+
         return redirect()->route('admin.timedays')->with('success', 'Waktu berhalangan dosen berhasil dihapus');
     }
-
 }

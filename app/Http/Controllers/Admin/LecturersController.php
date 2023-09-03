@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
+
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lecturer;
@@ -11,13 +13,11 @@ class LecturersController extends Controller
     {
         $lecturers = Lecturer::orderBy('id', 'desc');
 
-        if (!empty($request->searchname))
-        {
+        if (!empty($request->searchname)) {
             $lecturers = $lecturers->where('name', 'LIKE', '%' . $request->searchname . '%');
         }
 
-        if (!empty($request->searchnidn))
-        {
+        if (!empty($request->searchnidn)) {
             $lecturers = $lecturers->where('nidn', 'LIKE', '%' . $request->searchnidn . '%');
         }
 
@@ -55,8 +55,7 @@ class LecturersController extends Controller
     {
         $lecturers = Lecturer::find($id);
 
-        if ($lecturers == null)
-        {
+        if ($lecturers == null) {
             return view('admin.layouts.404');
         }
 
@@ -87,7 +86,11 @@ class LecturersController extends Controller
     {
         Lecturer::find($id)->delete();
 
-        return redirect()->route('admin.lecturers')->with('success', 'Dosen berhasil dihapus');
-    }
+        $notification = array(
+            'message' => 'Guru Deleted SuccessFully',
+            'alert-type' => 'success'
+        );
 
+        return redirect()->route('admin.lecturers')->with($notification);
+    }
 }
