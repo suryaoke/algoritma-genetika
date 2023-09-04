@@ -67,11 +67,11 @@
                                                 {{ $teach->year }}
                                             </td>
                                             <td>
-                                                <a id="delete" href="{{ route('admin.lecturer.delete', $teach->id) }}"
+                                                <a id="delete" href="{{ route('admin.teach.delete', $teach->id) }}"
                                                     class="btn btn-danger mr-1 mb-2">
                                                     <i data-lucide="trash" class="w-5 h-5"></i>
                                                 </a>
-                                                <a href="{{ route('admin.lecturer.edit', $teach->id) }}"
+                                                <a href="{{ route('admin.teach.edit', $teach->id) }}"
                                                     class="btn btn-success mr-1 mb-2">
                                                     <i data-lucide="edit" class="w-5 h-5"></i>
                                                 </a>

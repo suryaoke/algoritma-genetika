@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-content">
-        <h1 class="text-lg font-medium mb-4">Data Pengampu All</h1>
+        <h1 class="text-lg font-medium mb-4">Data Jam All</h1>
         <div class="mb-3 intro-y flex flex-col sm:flex-row items-center mt-4">
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0 ml-auto">
                 <a href="{{ route('admin.time.create') }}" class="btn btn-primary shadow-md mr-2">Tambah Data</a>

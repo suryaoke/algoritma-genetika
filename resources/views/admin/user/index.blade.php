@@ -11,7 +11,7 @@
                 'class' => 'w-full sm:w-auto flex mt-4 sm:mt-0 mx-auto',
             ]) !!}
             <div class="w-full sm:w-auto flex">
-                <a href="{{ route('admin.lecturer.create') }}" class="btn btn-primary shadow-md mr-2">Tambah Data</a>
+                <a href="{{ route('admin.user.create') }}" class="btn btn-primary shadow-md mr-2">Tambah Data</a>
             </div>
             <div class="flex-1 sm:mr-2">
                 <div class="form-group">

@@ -1,52 +1,29 @@
 @extends('admin.layouts.master')
 
 @section('title')
-{{ $title = 'Ubah Waktu Tidak Bersedia Dosen' }}
+    {{ $title = 'Ubah Waktu Tidak Bersedia Dosen' }}
 @stop
 
 
 @section('content')
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Main content -->
-    <section class="content">
+    <div class="intro-y flex items-center mt-8 mb-4">
+        <h1 class="text-lg font-medium mr-auto">Edit Data Waktu Berhalangan</h1>
+    </div>
+    <div class="box-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="box">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">
-                            {{ $title }}
-                        </h3>
-                        <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse" type="button">
-                                <i class="fa fa-minus">
-                                </i>
-                            </button>
-                            <button class="btn btn-box-tool" data-widget="remove" type="button">
-                                <i class="fa fa-times">
-                                </i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel-body no-padding" style="display: block;">
-                                    @include('admin._partials.notifications')
-                                    {!! Form::model($timenotavailables, ['route' => ['admin.timenotavailable.update', $timenotavailables->id], 'files' => true, 'id' => 'form-register']) !!}
-                                        @include('admin.timenotavailable.form')
-                                    {!! Form::close() !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="panel-body no-padding" style="display: block;">
+                    @include('admin._partials.notifications')
+                    {!! Form::model($timenotavailables, [
+                        'route' => ['admin.timenotavailable.update', $timenotavailables->id],
+                        'files' => true,
+                        'id' => 'form-register',
+                    ]) !!}
+                    @include('admin.timenotavailable.form')
+                    {!! Form::close() !!}
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
         </div>
-    </section>
-    <!-- /.content -->
-</div>
+    </div>
+
 @stop
