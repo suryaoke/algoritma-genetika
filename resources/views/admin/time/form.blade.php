@@ -39,10 +39,10 @@
 </div>
 <div class="mt-3">
     <label>
-        Sks
+        Jp
     </label>
     {!! Form::select(
-        'sks',
+        'jp',
         [
             '1' => '1',
             '2' => '2',
@@ -50,9 +50,9 @@
             '4' => '4',
         ],
         null,
-        ['class' => 'form-control select2 to-select', 'id' => 'sks', 'required', 'placeholder' => 'Pilih Sks'],
+        ['class' => 'form-control select2 to-select', 'id' => 'jp', 'required', 'placeholder' => 'Pilih Jp'],
     ) !!}
-    <label id="sks-error" class="error" for="sks" style="display: none;">This field is required.</label>
+    <label id="jp-error" class="error" for="jp" style="display: none;">This field is required.</label>
 </div>
 
 <div class="mt-4">

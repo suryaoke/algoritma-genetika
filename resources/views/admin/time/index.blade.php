@@ -45,7 +45,7 @@
                                                 {{ $time->range }}
                                             </td>
                                             <td>
-                                                {{ $time->sks }}
+                                                {{ $time->jp }}
                                             </td>
                                             <td>
                                                 <a id="delete" href="{{ route('admin.time.delete', $time->id) }}"

@@ -43,17 +43,19 @@ class CoursesController extends Controller
         $this->validate($request, [
             'code_courses' => 'unique:courses,code_courses|required',
             'namecourses'  => 'required',
-            'sks'          => 'required',
+            'jp'          => 'required',
             'semester'     => 'required',
+            'jurusan'     => 'required',
 
         ]);
 
         $params = [
             'code_courses' => $request->input('code_courses'),
             'name'         => $request->input('namecourses'),
-            'sks'          => $request->input('sks'),
+            'jp'          => $request->input('jp'),
             'semester'     => $request->input('semester'),
             'type'         => $request->input('type'),
+            'jurusan'         => $request->input('jurusan'),
         ];
 
         $courses = Course::create($params);
@@ -83,17 +85,19 @@ class CoursesController extends Controller
         $this->validate($request, [
             'code_courses' => 'unique:courses,code_courses,' . $id . '|required',
             'namecourses'  => 'required',
-            'sks'          => 'required',
+            'jp'          => 'required',
             'semester'     => 'required',
+            'jurusan'     => 'required',
 
         ]);
 
         $courses               = Course::find($id);
         $courses->code_courses = $request->input('code_courses');
         $courses->name         = $request->input('namecourses');
-        $courses->sks          = $request->input('sks');
+        $courses->jp          = $request->input('jp');
         $courses->semester     = $request->input('semester');
         $courses->type         = $request->input('type');
+        $courses->jurusan         = $request->input('jurusan');
         $courses->save();
 
         return redirect()->route('admin.courses');

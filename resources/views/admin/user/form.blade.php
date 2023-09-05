@@ -43,7 +43,7 @@
             'placeholder' => 'Pilih Role',
         ],
     ) !!}
-    <label id="sks-error" class="error" for="sks" style="display: none;">This field is required.</label>
+    <label id="jp-error" class="error" for="jp" style="display: none;">This field is required.</label>
 </div>
 
 @if (empty($users->password))

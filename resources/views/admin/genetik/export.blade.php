@@ -9,7 +9,7 @@
             <th>Mata Kuliah</th>
             <th>Dosen Pengampu</th>
             <th>Semester</th>
-            <th>SKS</th>
+            <th>JP</th>
             <th>Kelas</th>
             <th>Nilai</th>
         </tr>

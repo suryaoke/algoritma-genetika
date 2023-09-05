@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSksInTableTime extends Migration
+class AddjpInTableTime extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class AddSksInTableTime extends Migration
     {
         Schema::table('times', function (Blueprint $table)
         {
-            $table->integer('sks')->after('range')->nullable();
+            $table->integer('jp')->after('range')->nullable();
         });
     }
 
@@ -28,7 +28,7 @@ class AddSksInTableTime extends Migration
     {
         Schema::table('times', function (Blueprint $table)
         {
-            $table->dropColumn('sks');
+            $table->dropColumn('jp');
         });
     }
 }

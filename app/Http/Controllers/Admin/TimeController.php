@@ -25,7 +25,7 @@ class TimeController extends Controller
             'code_times'  => 'unique:times,code_times|required',
             'time_begin'  => 'required',
             'time_finish' => 'required',
-            'sks'         => 'required',
+            'jp'         => 'required',
         ]);
 
         $begin  = $request->input('time_begin');
@@ -37,7 +37,7 @@ class TimeController extends Controller
             'time_begin'  => $begin,
             'time_finish' => $finish,
             'range'       => $range,
-            'sks'         => $request->input('sks'),
+            'jp'         => $request->input('jp'),
         ];
 
         $times = Time::create($params);
@@ -63,7 +63,7 @@ class TimeController extends Controller
             'code_times'  => 'required',
             'time_begin'  => 'required',
             'time_finish' => 'required',
-            'sks'         => 'required',
+            'jp'         => 'required',
         ]);
 
         $times              = Time::find($id);
@@ -74,7 +74,7 @@ class TimeController extends Controller
         $times->time_begin  = $begin;
         $times->time_finish = $finish;
         $times->range       = $range;
-        $times->sks         = $request->input('sks');
+        $times->jp         = $request->input('jp');
         $times->save();
 
         return redirect()->route('admin.times');

@@ -32,7 +32,7 @@ class GenerateAlgoritma
                 if ($teach) {
                     $day   = Day::inRandomOrder()->first();
                     $room  = Room::where('type', $teach->course->type)->inRandomOrder()->first();
-                    $time  = Time::where('sks', $teach->course->sks)->inRandomOrder()->first();
+                    $time  = Time::where('jp', $teach->course->jp)->inRandomOrder()->first();
 
                     $params = [
                         'teachs_id' => $teach->id,

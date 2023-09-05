@@ -35,10 +35,11 @@
                                 <thead>
                                     <tr>
                                         <th class="whitespace-nowrap">No</th>
-                                        <th class="whitespace-nowrap">Kode Mata Kuliah</th>
-                                        <th class="whitespace-nowrap">Nama Mata Kuliah</th>
+                                        <th class="whitespace-nowrap">Kode Mata Pelajaran</th>
+                                        <th class="whitespace-nowrap">Nama Mata Pelajaran</th>
                                         <th class="whitespace-nowrap">JP</th>
                                         <th class="whitespace-nowrap">Semester</th>
+                                        <th class="whitespace-nowrap">Jurusan</th>
                                         <th class="whitespace-nowrap">Type</th>
                                         <th class="whitespace-nowrap">Action</th>
                                     </tr>
@@ -56,10 +57,13 @@
                                                 {{ $course->name }}
                                             </td>
                                             <td>
-                                                {{ $course->sks }}
+                                                {{ $course->jp }}
                                             </td>
                                             <td>
                                                 {{ $course->semester }}
+                                            </td>
+                                                <td>
+                                                {{ $course->jurusan }}
                                             </td>
                                             <td>
                                                 {{ $course->type }}

@@ -72,7 +72,7 @@
                                 <th style="text-align:center;">Mata Kuliah</th>
                                 <th style="text-align:center;">Dosen Pengampu</th>
                                 <th style="text-align:center;">Semester</th>
-                                <th style="text-align:center;">SKS</th>
+                                <th style="text-align:center;">JP</th>
                                 <th style="text-align:center;">Kelas</th>
                             </tr>
                         </thead>
@@ -97,7 +97,7 @@
                                     </td>
                                     <td>{{ isset($schedule->teach->course->semester) ? $schedule->teach->course->semester : '' }}
                                     </td>
-                                    <td>{{ isset($schedule->teach->course->sks) ? $schedule->teach->course->sks : '' }}
+                                    <td>{{ isset($schedule->teach->course->jp) ? $schedule->teach->course->jp : '' }}
                                     </td>
                                     <td>{{ isset($schedule->teach->class_room) ? $schedule->teach->class_room : '' }}
                                     </td>

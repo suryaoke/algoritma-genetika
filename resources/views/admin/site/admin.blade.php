@@ -20,7 +20,7 @@
 
                         </h2>
                     </div>
-                    @if (Auth::user()->role == '4')
+                    @if (Auth::user()->role != '5')
                         <div class="grid grid-cols-12 gap-6 ">
                             <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
                                 <div class="report-box zoom-in">

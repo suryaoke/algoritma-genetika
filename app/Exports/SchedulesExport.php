@@ -30,7 +30,7 @@ class SchedulesExport implements FromCollection, WithMapping
             'Mata Kuliah' => isset($schedule->teach->course->name) ? $schedule->teach->course->name : '',
             'Dosen Pengampu' => isset($schedule->teach->lecturer->name) ? $schedule->teach->lecturer->name : '',
             'Semester' => isset($schedule->teach->course->semester) ? $schedule->teach->course->semester : '',
-            'SKS' => isset($schedule->teach->course->sks) ? $schedule->teach->course->sks : '',
+            'JP' => isset($schedule->teach->course->jp) ? $schedule->teach->course->jp : '',
             'Kelas' => isset($schedule->teach->class_room) ? $schedule->teach->class_room : '',
             'Nilai' => isset($schedule->value) ? $schedule->value : '',
         ];
@@ -47,7 +47,7 @@ class SchedulesExport implements FromCollection, WithMapping
             'Mata Kuliah',
             'Dosen Pengampu',
             'Semester',
-            'SKS',
+            'JP',
             'Kelas',
             'Nilai',
         ];

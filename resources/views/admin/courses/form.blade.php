@@ -28,10 +28,10 @@
     </div>
     <div class="mt-3">
         <label>
-            Sks
+            Jp
         </label>
         {!! Form::select(
-            'sks',
+            'jp',
             [
                 '1' => '1',
                 '2' => '2',
@@ -41,12 +41,12 @@
             null,
             [
                 'class' => 'intro-x login__input form-control py-3 px-4 blockselect2 to-select',
-                'id' => 'sks',
+                'id' => 'jp',
                 'required',
-                'placeholder' => 'Pilih Sks',
+                'placeholder' => 'Pilih Jp',
             ],
         ) !!}
-        <label id="sks-error" class="error" for="sks" style="display: none;">This field is required.</label>
+        <label id="jp-error" class="error" for="jp" style="display: none;">This field is required.</label>
     </div>
     <div class="mt-3">
         <label>
@@ -67,6 +67,28 @@
             ],
         ) !!}
         <label id="semester-error" class="error" for="semester" style="display: none;">This field is required.</label>
+    </div>
+
+    <div class="mt-3">
+        <label>
+            Jurusan
+        </label>
+        {!! Form::select(
+            'jurusan',
+            [
+                'Teori' => 'Teori',
+                'TKJ' => 'TKJ',
+                'Multimedia' => 'Multimedia'
+            ],
+            null,
+            [
+                'class' => 'intro-x login__input form-control py-3 px-4 block select2 to-select',
+                'id' => 'jurusan',
+                'required',
+                'placeholder' => 'Pilih Jurusan',
+            ],
+        ) !!}
+        <label id="jurusan-error" class="error" for="type" style="display: none;">This field is required.</label>
     </div>
     <div class="mt-3">
         <label>

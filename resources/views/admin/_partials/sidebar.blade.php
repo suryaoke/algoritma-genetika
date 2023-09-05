@@ -79,6 +79,51 @@
 
           </li>
 
+          {{--  // bagian Kepala Sekolah  --}}
+          @if (Auth::user()->role == '2' || Auth::user()->role == '3')
+
+              <li>
+                  @if ($url == $guru)
+                      <a href="{{ route('admin.lecturers') }}" class="side-menu  side-menu--active">
+                      @elseif ($url == $guruadd)
+                          <a href="{{ route('admin.lecturers') }}" class="side-menu  side-menu--active">
+                          @elseif ($url == $guruedit)
+                              <a href="{{ route('admin.lecturers') }}" class="side-menu  side-menu--active">
+                              @else
+                                  <a href="{{ route('admin.lecturers') }}"class="side-menu ">
+                  @endif
+                  <div class="side-menu__icon"> <i data-lucide="users"></i> </div>
+                  <div class="side-menu__title"> Guru</div>
+                  </a>
+              </li>
+
+
+              <li>
+                  @if ($url == $mapel)
+                      <a href="{{ route('admin.courses') }}" class="side-menu  side-menu--active">
+                      @elseif ($url == $mapeladd)
+                          <a href="{{ route('admin.courses') }}" class="side-menu  side-menu--active">
+                          @elseif ($url == $mapeledit)
+                              <a href="{{ route('admin.courses') }}" class="side-menu  side-menu--active">
+                              @else
+                                  <a href="{{ route('admin.courses') }}" class="side-menu ">
+                  @endif
+                  <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                  <div class="side-menu__title"> Mata Pelajaran </div>
+                  </a>
+              </li>
+          @endif
+          {{--  // end bagian Kepala Sekolah  --}}
+          @if (Auth::user()->role == '2' || Auth::user()->role == '5')
+              <li>
+
+                  <a href="{{ route('admin.courses') }}" class="side-menu ">
+
+                      <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                      <div class="side-menu__title"> Jadwal Mata Pelajaran </div>
+                  </a>
+              </li>
+          @endif
           {{--  // bagian Jurusan --}}
           @if (Auth::user()->role == '4')
               <li>
@@ -182,7 +227,7 @@
                   </a>
               </li>
           @endif
-          {{--  // bagian Jurusan --}}
+          {{--  //end bagian Jurusan --}}
 
           {{--  // bagian Guru --}}
           @if (Auth::user()->role == '5')
