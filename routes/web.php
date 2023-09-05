@@ -11,20 +11,23 @@
 |
 */
 
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\DayController;
 use App\Http\Controllers\Admin\LecturersController;
+use App\Http\Controllers\admin\PengajuanTimenotavailableController;
 use App\Http\Controllers\Admin\RoomsController;
 use App\Http\Controllers\Admin\TimeController;
 use App\Http\Controllers\Admin\TimedayController;
 use App\Http\Controllers\Admin\TimenotavailableController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Admin'], function () {
     Route::get('/', ['as' => 'admin.login', 'uses' => 'AuthController@index']);
     Route::post('/submit', ['as' => 'admin.login.submit', 'uses' => 'AuthController@login']);
-    Route::get('logout', ['as' => 'admin.logout', 'uses' => 'AuthController@logout']);
+
 
     Route::group(['middleware' => ['auth.admin'], 'prefix' => 'admin'], function () {
         Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'SiteController@index']);
@@ -103,6 +106,14 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::post('timenotavailable/update/{id?}', ['as' => 'admin.timenotavailable.update', 'uses' => 'TimenotavailableController@update']);
 
 
+        // Pengajuan TimesNotAvailable
+        Route::get('pengajuantimenotavailable', ['as' => 'admin.pengajuantimenotavailables', 'uses' => 'PengajuanTimenotavailableController@index']);
+        Route::get('pengajuantimenotavailable/create', ['as' => 'admin.pengajuantimenotavailable.create', 'uses' => 'PengajuanTimenotavailableController@create']);
+        Route::post('pengajuantimenotavailable/create', ['as' => 'admin.pengajuantimenotavailable.store', 'uses' => 'PengajuanTimenotavailableController@store']);
+        Route::get('pengajuantimenotavailable/edit/{id}', ['as' => 'admin.pengajuantimenotavailable.edit', 'uses' => 'PengajuanTimenotavailableController@edit']);
+        Route::post('pengajuantimenotavailable/update/{id?}', ['as' => 'admin.pengajuantimenotavailable.update', 'uses' => 'PengajuanTimenotavailableController@update']);
+
+
         //timedays
         Route::get('timedays', ['as' => 'admin.timedays', 'uses' => 'TimedayController@index']);
         Route::get('timedays/create', ['as' => 'admin.timeday.create', 'uses' => 'TimedayController@create']);
@@ -141,10 +152,41 @@ Route::controller(TimenotavailableController::class)->group(function () {
     Route::get('timenotavailable/delete/{id}', 'destroy')->name('admin.timenotavailable.delete');
 });
 
+Route::controller(PengajuanTimenotavailableController::class)->group(function () {
+    Route::get('/pengajuantimenotavailable/delete/{id}', 'destroy')->name('admin.pengajuantimenotavailable.delete');
+    Route::get('/pengajuantimenotavailable/ditolak/{id}', 'Diterima')->name('admin.pengajuantimenotavailable.diterima');
+    Route::get('/pengajuantimenotavailable/diterima/{id}', 'Ditolak')->name('admin.pengajuantimenotavailable.ditolak');
+});
+
 Route::controller(UserController::class)->group(function () {
     Route::get('users/delete/{id}', 'destroy')->name('admin.user.delete');
 });
 
+
+Route::controller(UserController::class)->middleware(['auth'])->group(function () {
+    Route::get('/user/view/{id}', 'UserView')->name('user.view');
+    Route::get('/user/edit/{id}', 'UserEdit')->name('user.edit');
+    Route::post('/user/update', 'UserUpdate')->name('user.update');
+    Route::get('users/delete/{id}', 'destroy')->name('admin.user.delete');
+    Route::post('/user/reset', 'UserReset')->name('user.reset');
+    Route::get('/user/tidak/aktif{id}', 'UserTidakAktif')->name('user.tidak.aktif');
+    Route::get('/user/aktif{id}', 'UserAktif')->name('user.aktif');
+});
+
 Route::controller(RoomsController::class)->group(function () {
     Route::get('rooms/delete/{id}', 'destroy')->name('admin.room.delete');
+});
+
+
+Route::controller(AuthController::class)->middleware(['auth'])->group(function () {
+    Route::get('logout', 'logout')->name('admin.logout');
+});
+
+Route::controller(AdminController::class)->middleware(['auth'])->group(function () {
+
+    Route::get('/admin/profile', 'Profile')->name('admin.profile');
+    Route::get('/edit/profile', 'EditProfile')->name('edit.profile');
+    Route::post('/store/profile', 'StoreProfile')->name('store.profile');
+    Route::get('/change/password', 'ChangePassword')->name('change.password');
+    Route::post('/update/password', 'UpdatePassword')->name('update.password');
 });

@@ -1,7 +1,9 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
+
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -23,21 +25,39 @@ class AuthController extends Controller
             'password' => $request->input('password'),
         ];
 
-        if (Auth::attempt($attempts))
-        {
-            return redirect()->route('admin.dashboard');
+        if (Auth::attempt($attempts)) {
+            $notification = array(
+                'message' => 'User Login Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('admin.dashboard')->with($notification);
         }
+        $notification = array(
+            'message' => 'Email dan Password Salah',
+            'alert-type' => 'warning'
+        );
 
-        $error = 'Invalid email or password';
 
-        $request->session()->flash('danger', $error);
+        $request->session(); // Change 'danger' to 'alert-danger'
 
-        return back();
+        return back()->with($notification);
     }
+
 
     public function logout(Request $request)
     {
-        Auth::logout();
-        return redirect()->route('admin.login');
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        $notification = array(
+            'message' => 'User Logout Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect('/')->with($notification);
     }
 }

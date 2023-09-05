@@ -17,7 +17,7 @@
                 <div class="form-group">
                     {!! Form::text('searchname', request()->input('searchname'), [
                         'class' => 'form-control',
-                        'placeholder' => 'Mencari Berdasarkan Nama Lengkap',
+                        'placeholder' => ' Nama Lengkap',
                     ]) !!}
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <div class="form-group">
                     {!! Form::text('searchemail', request()->input('searchemail'), [
                         'class' => 'form-control',
-                        'placeholder' => 'Mencari Berdasarkan Email',
+                        'placeholder' => 'Berdasarkan Email',
                     ]) !!}
                 </div>
             </div>
@@ -45,7 +45,9 @@
                                     <tr>
                                         <th class="whitespace-nowrap">No.</th>
                                         <th class="whitespace-nowrap">Nama Lengkap</th>
+                                        <th class="whitespace-nowrap">User Image</th>
                                         <th class="whitespace-nowrap">Email</th>
+                                        <th class="whitespace-nowrap">Role</th>
                                         <th class="whitespace-nowrap">Action</th>
                                     </tr>
                                 </thead>
@@ -53,16 +55,43 @@
                                     @foreach ($users as $key => $user)
                                         <tr>
                                             <td align="center">
-                                                {{ ($users->currentpage() - 1) * $users->perpage() + $key + 1 }}
+                                                {{ $key + 1 }}
                                             </td>
                                             <td>{{ $user->name }}</td>
+                                            <td>
+                                                <img style="width:80px; height:60px"
+                                                    src=" {{ !empty($user->profile_image) ? url('uploads/admin_images/' . $user->profile_image) : url('uploads/admin_images/no_image.png') }}"
+                                                    alt="">
+                                            </td>
                                             <td>{{ $user->email }}</td>
                                             <td>
-                                                <a id="delete" href="{{ route('admin.user.delete', $user->id) }}"
-                                                    class="btn btn-danger mr-1 mb-2">
-                                                    <i data-lucide="trash" class="w-5 h-5"></i>
-                                                </a>
-                                                <a href="{{ route('admin.user.edit', $user->id) }}"
+                                                @if ($user->role == '0')
+                                                    <span class="btn btn-outline-secondary">Belum di Pilih</span>
+                                                @elseif ($user->role == '-')
+                                                    <span class="btn btn-outline-secondary">Tidak Aktif</span>
+                                                @elseif($user->role == '1')
+                                                    <span class="btn btn-outline-pending">Admin</span>
+                                                @elseif($user->role == '2')
+                                                    <span class="btn btn-outline-primary">Kepala Sekolah</span>
+                                                @elseif($user->role == '3')
+                                                    <span class="btn btn-outline-warning">Waka Kurikulum</span>
+                                                @elseif($user->role == '4')
+                                                    <span class="btn btn-outline-dark">Jurusan</span>
+                                                @elseif($user->role == '5')
+                                                    <span class="btn btn-outline-dark">Guru</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($user->role != '-')
+                                                    <a href="{{ route('user.tidak.aktif', $user->id) }}"
+                                                        class="btn btn-danger mr-1 mb-2" title="Inactive">
+                                                        <i data-lucide="x-circle" class="w-5 h-5"></i> </a>
+                                                @elseif($user->role == '-')
+                                                    <a href="{{ route('user.aktif', $user->id) }}"
+                                                        class="btn btn-success mr-1 mb-2" title="Active">
+                                                        <i data-lucide="check-circle" class="w-5 h-5"></i> </a>
+                                                @endif
+                                                <a href="{{ route('user.view', $user->id) }}"
                                                     class="btn btn-success mr-1 mb-2">
                                                     <i data-lucide="edit" class="w-5 h-5"></i>
                                                 </a>

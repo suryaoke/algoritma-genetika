@@ -43,7 +43,12 @@
       $not = URL::route('admin.timenotavailables');
       $notadd = URL::route('admin.timenotavailable.create');
       $generate = URL::route('admin.generates');
-      
+      $adminprofile = URL::route('admin.profile');
+      $admineditprofile = URL::route('edit.profile');
+      $adminchange = URL::route('change.password');
+      $pengajuan = URL::route('admin.pengajuantimenotavailables');
+      $gurupengajuan = URL::route('admin.pengajuantimenotavailables');
+      $pengajuanadd = URL::route('admin.pengajuantimenotavailable.create');
   @endphp
 
   <nav class="side-nav">
@@ -57,8 +62,14 @@
           <li>
               @if ($url == $dashboard)
                   <a href="{{ route('admin.dashboard') }}" class="side-menu  side-menu--active">
-                  @else
-                      <a href="{{ route('admin.dashboard') }}" class="side-menu ">
+                  @elseif ($url == $adminprofile)
+                      <a href="{{ route('admin.dashboard') }}" class="side-menu  side-menu--active">
+                      @elseif ($url == $admineditprofile)
+                          <a href="{{ route('admin.dashboard') }}" class="side-menu  side-menu--active">
+                          @elseif ($url == $adminchange)
+                              <a href="{{ route('admin.dashboard') }}" class="side-menu  side-menu--active">
+                              @else
+                                  <a href="{{ route('admin.dashboard') }}" class="side-menu ">
               @endif
               <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
               <div class="side-menu__title">
@@ -67,158 +78,214 @@
               </a>
 
           </li>
-          <li>
-              @if ($url == $time)
-                  <a href="javascript:;" class="side-menu  side-menu--active">
-                  @elseif ($url == $timeadd)
+
+          {{--  // bagian Jurusan --}}
+          @if (Auth::user()->role == '4')
+              <li>
+                  @if ($url == $time)
                       <a href="javascript:;" class="side-menu  side-menu--active">
-                      @elseif ($url == $timeedit)
+                      @elseif ($url == $timeadd)
                           <a href="javascript:;" class="side-menu  side-menu--active">
-                          @elseif ($url == $day)
+                          @elseif ($url == $timeedit)
                               <a href="javascript:;" class="side-menu  side-menu--active">
-                              @elseif ($url == $dayedit)
+                              @elseif ($url == $day)
                                   <a href="javascript:;" class="side-menu  side-menu--active">
-                                  @elseif ($url == $dayadd)
+                                  @elseif ($url == $dayedit)
                                       <a href="javascript:;" class="side-menu  side-menu--active">
-                                      @elseif ($url == $notedit)
+                                      @elseif ($url == $dayadd)
                                           <a href="javascript:;" class="side-menu  side-menu--active">
-                                          @elseif ($url == $notadd)
+                                          @elseif ($url == $notedit)
                                               <a href="javascript:;" class="side-menu  side-menu--active">
-                                              @elseif ($url == $not)
+                                              @elseif ($url == $notadd)
                                                   <a href="javascript:;" class="side-menu  side-menu--active">
-                                                  @else
-                                                      <a href="javascript:;" class="side-menu ">
-              @endif
-              <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
-              <div class="side-menu__title">
-                  Data Waktu
-                  <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
-              </div>
-              </a>
-              <ul class="">
-                  <li>
-                      <a href="{{ route('admin.times') }}" class="side-menu">
-                          <div class="side-menu__icon"> <i data-lucide="clock"></i> </div>
-                          <div class="side-menu__title"> Jam </div>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('admin.days') }}" class="side-menu">
-                          <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
-                          <div class="side-menu__title"> Hari </div>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('admin.timenotavailables') }}" class="side-menu">
-                          <div class="side-menu__icon"> <i data-lucide="clock"></i> </div>
-                          <div class="side-menu__title"> Waktu Berhalangan</div>
-                      </a>
-                  </li>
-              </ul>
-          </li>
+                                                  @elseif ($url == $not)
+                                                      <a href="javascript:;" class="side-menu  side-menu--active">
+                                                      @elseif ($url == $pengajuan)
+                                                          <a href="javascript:;" class="side-menu  side-menu--active">
+                                                          @else
+                                                              <a href="javascript:;" class="side-menu ">
+                  @endif
+                  <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
+                  <div class="side-menu__title">
+                      Data Waktu
+                      <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                  </div>
+                  </a>
+                  <ul class="">
+                      <li>
+                          <a href="{{ route('admin.times') }}" class="side-menu">
+                              <div class="side-menu__icon"> <i data-lucide="clock"></i> </div>
+                              <div class="side-menu__title"> Jam </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{ route('admin.days') }}" class="side-menu">
+                              <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
+                              <div class="side-menu__title"> Hari </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{ route('admin.timenotavailables') }}" class="side-menu">
+                              <div class="side-menu__icon"> <i data-lucide="clock"></i> </div>
+                              <div class="side-menu__title"> Waktu Berhalangan</div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{ route('admin.pengajuantimenotavailables') }}" class="side-menu">
+                              <div class="side-menu__icon"> <i data-lucide="clock"></i> </div>
+                              <div class="side-menu__title"> Pengajuan Waktu Berhalangan</div>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
 
-          <li>
-              @if ($url == $guru)
-                  <a href="{{ route('admin.lecturers') }}" class="side-menu  side-menu--active">
-                  @elseif ($url == $guruadd)
-                      <a href="{{ route('admin.lecturers') }}" class="side-menu  side-menu--active">
-                      @elseif ($url == $guruedit)
-                          <a href="{{ route('admin.lecturers') }}" class="side-menu  side-menu--active">
-                          @else
-                              <a href="{{ route('admin.lecturers') }}" class="side-menu ">
-              @endif
-
-              <div class="side-menu__icon"> <i data-lucide="users"></i> </div>
-              <div class="side-menu__title"> Guru</div>
-              </a>
-          </li>
-          <li>
-              @if ($url == $mapel)
-                  <a href="{{ route('admin.courses') }}" class="side-menu  side-menu--active">
-                  @elseif ($url == $mapeladd)
+              <li>
+                  @if ($url == $mapel)
                       <a href="{{ route('admin.courses') }}" class="side-menu  side-menu--active">
-                      @elseif ($url == $mapeledit)
+                      @elseif ($url == $mapeladd)
                           <a href="{{ route('admin.courses') }}" class="side-menu  side-menu--active">
-                          @else
-                              <a href="{{ route('admin.courses') }}" class="side-menu ">
-              @endif
-              <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
-              <div class="side-menu__title"> Mata Pelajaran </div>
-              </a>
-          </li>
-          <li>
-              @if ($url == $pengampu)
-                  <a href="{{ route('admin.teachs') }}" class="side-menu  side-menu--active">
-                  @elseif ($url == $pengampuadd)
+                          @elseif ($url == $mapeledit)
+                              <a href="{{ route('admin.courses') }}" class="side-menu  side-menu--active">
+                              @else
+                                  <a href="{{ route('admin.courses') }}" class="side-menu ">
+                  @endif
+                  <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                  <div class="side-menu__title"> Mata Pelajaran </div>
+                  </a>
+              </li>
+              <li>
+                  @if ($url == $pengampu)
                       <a href="{{ route('admin.teachs') }}" class="side-menu  side-menu--active">
-                      @elseif ($url == $pengampuedit)
+                      @elseif ($url == $pengampuadd)
                           <a href="{{ route('admin.teachs') }}" class="side-menu  side-menu--active">
-                          @else
-                              <a href="{{ route('admin.teachs') }}" class="side-menu">
-              @endif
-              <div class="side-menu__icon"> <i data-lucide="landmark"></i> </div>
-              <div class="side-menu__title"> Pengampu </div>
-              </a>
-          </li>
-          <li>
-              @if ($url == $room)
-                  <a href="{{ route('admin.teachs') }}" class="side-menu  side-menu--active">
-                  @elseif ($url == $roomadd)
-                      <a href="{{ route('admin.rooms') }}" class="side-menu  side-menu--active">
-                      @elseif ($url == $roomedit)
+                          @elseif ($url == $pengampuedit)
+                              <a href="{{ route('admin.teachs') }}" class="side-menu  side-menu--active">
+                              @else
+                                  <a href="{{ route('admin.teachs') }}" class="side-menu">
+                  @endif
+                  <div class="side-menu__icon"> <i data-lucide="landmark"></i> </div>
+                  <div class="side-menu__title"> Pengampu </div>
+                  </a>
+              </li>
+              <li>
+                  @if ($url == $room)
+                      <a href="{{ route('admin.teachs') }}" class="side-menu  side-menu--active">
+                      @elseif ($url == $roomadd)
                           <a href="{{ route('admin.rooms') }}" class="side-menu  side-menu--active">
-                          @else
-                              <a href="{{ route('admin.rooms') }}" class="side-menu">
-              @endif
-              <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
-              <div class="side-menu__title"> Ruangan</div>
-              </a>
-          </li>
-          <li>
-              @if ($url == $user)
-                  <a href="{{ route('admin.user') }}" class="side-menu  side-menu--active">
-                  @elseif ($url == $useradd)
-                      <a href="{{ route('admin.user') }}" class="side-menu  side-menu--active">
-                      @elseif ($url == $useredit)
-                          <a href="{{ route('admin.user') }}" class="side-menu  side-menu--active">
-                          @else
-                              <a href="{{ route('admin.user') }}" class="side-menu">
-              @endif
-              <div class="side-menu__icon"> <i data-lucide="user"></i> </div>
-              <div class="side-menu__title"> User</div>
-              </a>
-          </li>
+                          @elseif ($url == $roomedit)
+                              <a href="{{ route('admin.rooms') }}" class="side-menu  side-menu--active">
+                              @else
+                                  <a href="{{ route('admin.rooms') }}" class="side-menu">
+                  @endif
+                  <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
+                  <div class="side-menu__title"> Ruangan</div>
+                  </a>
+              </li>
+          @endif
+          {{--  // bagian Jurusan --}}
 
-          <li>
-              @if ($url == $generate)
-                  <a href="javascript:;" class="side-menu  side-menu--active">
-                  @elseif ($url == $hasilgenerate)
+          {{--  // bagian Guru --}}
+          @if (Auth::user()->role == '5')
+              <li>
+                  @if ($url == $gurupengajuan)
+                      <a href="{{ route('admin.pengajuantimenotavailables') }}" class="side-menu  side-menu--active">
+                      @elseif ($url == $pengajuanadd)
+                          <a href="{{ route('admin.pengajuantimenotavailables') }}"
+                              class="side-menu  side-menu--active">
+                          @else
+                              <a href="{{ route('admin.pengajuantimenotavailables') }}" class="side-menu">
+                  @endif
+                  <div class="side-menu__icon"> <i data-lucide="clock"></i> </div>
+                  <div class="side-menu__title"> Waktu Berhalangan </div>
+                  </a>
+              </li>
+          @endif
+          {{--  // End bagian Guru --}}
+
+          {{--  // bagian wakil Kurikulum  --}}
+          @if (Auth::user()->role == '3')
+
+              <li>
+                  @if ($url == $generate)
                       <a href="javascript:;" class="side-menu  side-menu--active">
-                      @else
-                          <a href="javascript:;" class="side-menu">
-              @endif
-              <div class="side-menu__icon"> <i data-lucide="file-plus"></i> </div>
-              <div class="side-menu__title">
-                  Generate Jadwal
-                  <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
-              </div>
-              </a>
-              <ul class="">
-                  <li>
-                      <a href="{{ route('admin.generates') }}" class="side-menu">
-                          <div class="side-menu__icon"> <i data-lucide="edit"></i> </div>
-                          <div class="side-menu__title"> Input Generate Jadwal</div>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('admin.generates.result', 1) }}"class="side-menu">
-                          <div class="side-menu__icon"> <i data-lucide="folder-plus"></i> </div>
-                          <div class="side-menu__title"> Hasil Generate Jadwal </div>
-                      </a>
-                  </li>
+                      @elseif ($url == $hasilgenerate)
+                          <a href="javascript:;" class="side-menu  side-menu--active">
+                          @else
+                              <a href="javascript:;" class="side-menu">
+                  @endif
+                  <div class="side-menu__icon"> <i data-lucide="file-plus"></i> </div>
+                  <div class="side-menu__title">
+                      Generate Jadwal
+                      <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                  </div>
+                  </a>
+                  <ul class="">
+                      <li>
+                          <a href="{{ route('admin.generates') }}" class="side-menu">
+                              <div class="side-menu__icon"> <i data-lucide="edit"></i> </div>
+                              <div class="side-menu__title"> Input Generate Jadwal</div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{ route('admin.generates.result', 1) }}"class="side-menu">
+                              <div class="side-menu__icon"> <i data-lucide="folder-plus"></i> </div>
+                              <div class="side-menu__title"> Hasil Generate Jadwal </div>
+                          </a>
+                      </li>
 
-              </ul>
-          </li>
+                  </ul>
+              </li>
+          @endif
+          {{--  // end bagian wakil Kurikulum  --}}
+
+
+          {{--  // bagian Admin  --}}
+          @if (Auth::user()->role == '1')
+              <li>
+                  @if ($url == $guru)
+                      <a href="javascript:;"class="side-menu  side-menu--active">
+                      @elseif ($url == $guruadd)
+                          <a href="javascript:;"class="side-menu  side-menu--active">
+                          @elseif ($url == $guruedit)
+                              <a href="javascript:;" class="side-menu  side-menu--active">
+                              @elseif ($url == $user)
+                                  <a href="javascript:;" class="side-menu  side-menu--active">
+                                  @elseif ($url == $useradd)
+                                      <a href="javascript:;" class="side-menu  side-menu--active">
+                                      @elseif ($url == $useredit)
+                                          <a href="javascript:;" class="side-menu  side-menu--active">
+                                          @else
+                                              <a href="javascript:;" class="side-menu ">
+                  @endif
+                  <div class="side-menu__icon"> <i data-lucide="user"></i> </div>
+                  <div class="side-menu__title">
+                      Master
+                      <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                  </div>
+                  </a>
+                  <ul class="">
+                      <li>
+                          <a href="{{ route('admin.lecturers') }}"class="side-menu ">
+                              <div class="side-menu__icon"> <i data-lucide="users"></i> </div>
+                              <div class="side-menu__title"> Guru</div>
+                          </a>
+                      </li>
+
+
+                      <li>
+
+
+                          <a href="{{ route('admin.user') }}" class="side-menu">
+
+                              <div class="side-menu__icon"> <i data-lucide="user"></i> </div>
+                              <div class="side-menu__title"> User</div>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+          @endif
+          {{--  // end bagian Admin  --}}
+
 
       </ul>
   </nav>
